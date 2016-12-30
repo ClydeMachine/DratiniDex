@@ -4,8 +4,17 @@ import java.io.IOException
 import java.net.SocketTimeoutException
 
 import com.amazon.speech.slu.Intent
-
+import com.amazon.speech.speechlet.{
+  IntentRequest,
+  LaunchRequest,
+  Session,
+  SessionEndedRequest,
+  SessionStartedRequest,
+  Speechlet,
+  SpeechletRequest
+}
 /*
+ * Taking heavy direction from: https://github.com/freqlabs/alexa-8ball-scala/
  * Logic flow:
  *
  * Take name from the user.
@@ -16,7 +25,7 @@ import com.amazon.speech.slu.Intent
  *
  */
 
-class Main {
+class AlexaBulba {
   val endpointGetPokeName = "http://pokeapi.co/api/v2/pokemon/"
   val endpointGetEvolInfo = "http://pokeapi.co/api/v2/evolution-chain/"
 
@@ -31,5 +40,4 @@ class Main {
       case timeout: SocketTimeoutException => println(s"Request timed out! $timeout")
     }
   }
-
 }
