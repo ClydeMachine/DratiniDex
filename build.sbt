@@ -12,9 +12,10 @@ lazy val root = (project in file(".")).
     version := "1.0",
     scalaVersion := "2.11.4",
     retrieveManaged := true,
-    libraryDependencies += "com.amazonaws" % "aws-lambda-java-core" % "1.0.0",
+    libraryDependencies += "com.amazonaws" % "aws-lambda-java-core" % "1.1.0",
     libraryDependencies += "com.amazonaws" % "aws-lambda-java-events" % "1.0.0",
-    libraryDependencies += "com.typesafe.play" % "play-json_2.11" % "2.5.10"
+    libraryDependencies += "com.typesafe.play" % "play-json_2.11" % "2.5.10",
+    libraryDependencies += "com.amazon.alexa" % "alexa-skills-kit" % "1.2"
   )
 
 assemblyMergeStrategy in assembly := {
