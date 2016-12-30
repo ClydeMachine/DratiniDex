@@ -2,7 +2,7 @@ name := "Alexa-Bulbapedia-Scala"
 
 version := "1.0"
 
-scalaVersion := "2.11.5"
+scalaVersion := "2.11.8"
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
 
@@ -13,7 +13,8 @@ lazy val root = (project in file(".")).
     scalaVersion := "2.11.4",
     retrieveManaged := true,
     libraryDependencies += "com.amazonaws" % "aws-lambda-java-core" % "1.0.0",
-    libraryDependencies += "com.amazonaws" % "aws-lambda-java-events" % "1.0.0"
+    libraryDependencies += "com.amazonaws" % "aws-lambda-java-events" % "1.0.0",
+    libraryDependencies += "com.typesafe.play" % "play-json_2.11" % "2.5.10"
   )
 
 assemblyMergeStrategy in assembly := {
