@@ -8,13 +8,20 @@ import com.clydemachine.alexabulbapedia.speech.ui.PlainTextOutputSpeech
 class AlexaBulbaSpeechlet extends Speechlet {
   import AlexaBulbaSpeechlet._
 
+  val helpText =
+    """
+      | This skill gives evolution information for almost all Poke'mon in existence.
+      | Ask something like, what does Abra evolve into, and I'll give you what I know.
+      | Try asking about a specific Poke'mon!
+    """.stripMargin
+
   override def onSessionStarted(request: SessionStartedRequest, session: Session): Unit = {
     logInvocation("onSessionStarted", request, session)
   }
 
   override def onLaunch(request: LaunchRequest, session: Session): SpeechletResponse = {
     logInvocation("onLaunch", request, session)
-    val outputSpeech = new PlainTextOutputSpeech("Which Poke'mon do you wish to know about? ")
+    val outputSpeech = new PlainTextOutputSpeech(helpText)
     new SpeechletResponse(outputSpeech)
   }
 
@@ -36,12 +43,7 @@ class AlexaBulbaSpeechlet extends Speechlet {
       val outputSpeech = new PlainTextOutputSpeech(PokeEvolutionInfoAnswer)
       new SpeechletResponse(outputSpeech)
     } else if (intentName == "AMAZON.HelpIntent") {
-      val outputSpeech = new PlainTextOutputSpeech(
-        """
-          | This skill gives evolution information for almost all Poke'mon in existence.
-          | Ask something like, what does Abra evolve into, and I'll give you what I know.
-          | Which Poke'mon would you like to know about?
-        """.stripMargin)
+      val outputSpeech = new PlainTextOutputSpeech(helpText)
       new SpeechletResponse(outputSpeech)
     } else {
       val outputSpeech = new PlainTextOutputSpeech("Until next time! ")
