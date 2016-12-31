@@ -1,5 +1,5 @@
 package com.clydemachine.alexabulbapedia
-
+/*
 import com.amazon.speech.speechlet.{SessionEndedRequest, _}
 import com.clydemachine.alexabulbapedia.PlainTextOutputSpeech
 
@@ -38,4 +38,6 @@ object BulbapediaSpeechlet {
     val sessionId = session.getSessionId
     println(s"$name requestId=$requestId sessionId=$sessionId")
   }
+
 }
+*/
