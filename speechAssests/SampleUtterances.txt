@@ -16,6 +16,8 @@ AMAZON.HelpIntent how do i use this
 AMAZON.CancelIntent no
 AMAZON.CancelIntent no thanks
 AMAZON.CancelIntent no thank you
+AMAZON.CancelIntent thanks
+AMAZON.CancelIntent thank you
 AMAZON.CancelIntent cancel
 AMAZON.CancelIntent stop
 AMAZON.CancelIntent quit
