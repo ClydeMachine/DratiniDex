@@ -1,6 +1,6 @@
 package com.clydemachine.alexabulbapedia
 
-import com.amazon.speech.slu.Intent
+import com.amazon.speech.slu.{Intent, Slot}
 import com.amazon.speech.speechlet._
 import com.clydemachine.alexabulbapedia.speech.speechlet.SpeechletResponse
 import com.clydemachine.alexabulbapedia.speech.ui.PlainTextOutputSpeech
@@ -24,12 +24,14 @@ class AlexaBulbaSpeechlet extends Speechlet {
     val intent: Intent = request.getIntent
     val intentName: String = intent.getName
 
-    // This log is for debugging purposes only.
+    // DEBUG
     logInvocation(s"onIntent detected intent: $intentName", request, session)
 
     if (intentName == "GetPokemonEvolution") {
       // This is where we actually handle the user's question and provide a response.
-      val ReceivedPokeName = "abra".toLowerCase
+      val ReceivedPokeName = request.getIntent.getSlot("pokemonname").getValue.toLowerCase
+      // DEBUG
+      logInvocation(s"onIntent detected pokemonname: $ReceivedPokeName", request, session)
       val PokeEvolutionInfoAnswer = AlexaBulba.getEvolutionDetails(ReceivedPokeName)
       val outputSpeech = new PlainTextOutputSpeech(PokeEvolutionInfoAnswer)
       new SpeechletResponse(outputSpeech)
