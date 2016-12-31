@@ -50,7 +50,6 @@ class AlexaBulba {
     try {
       val PokemonSpeciesDetails = Json.parse(get(endpointGetPokeName + pokename))
       val PokemonEvolutionChainURL = ((PokemonSpeciesDetails \ "evolution_chain" \ "url").get).as[String]
-      println(s"Got evolution chain, fetching from $PokemonEvolutionChainURL...")
       val PokemonEvolutionChainDetails = Json.parse(get(PokemonEvolutionChainURL))
 
       // Does this evolution chain contain evolution stages?
@@ -60,26 +59,41 @@ class AlexaBulba {
       val EvolutionMap = JacksMapper.readValue[Map[String,Any]](Chain)
 
       var response = ""
+
+      // Check for details of the first evolved state.
       if (EvolutionMap("evolves_to") != List()) {
-        /*
-        Response model:
+        val EvolutionDetails_FirstEvolution_Map: Map[String,Any] = EvolutionMap("evolves_to").asInstanceOf[List[Any]](0).asInstanceOf[Map[String,Any]]
+        val FirstEvolution_StartingFormName: String = EvolutionMap("species").asInstanceOf[Map[String,String]]("name")
+        response += "It appears " + FirstEvolution_StartingFormName + " evolves "
 
-        Pokename evolves at level [evolves_to(0).evolution_details(0).min_level] into [evolves_to(0).species.name].
-        , Then again at [evolves_to(0).evolves_to(0).evolution_details(0).min_level] into evolves_to(0).evolves_to(0).species.name.
-        min_level is null if special evolution, evolves_to = [] if none.
-        */
+        val FirstEvolution_Level = EvolutionDetails_FirstEvolution_Map("evolution_details").asInstanceOf[List[Any]](0).asInstanceOf[Map[String,Any]]("min_level")
+        if (FirstEvolution_Level != null) response += s"at level $FirstEvolution_Level "
 
-        val EvolutionMapList: List[String] = EvolutionMap("evolves_to").asInstanceOf[List[String]]
-        println(EvolutionMapList(0))
+        val FirstEvolution_Name = EvolutionDetails_FirstEvolution_Map("species").asInstanceOf[Map[String,Any]]("name")
+        if (FirstEvolution_Name != null) response += s"into $FirstEvolution_Name"
 
-        response += "It appears " + pokename + " evolves "
-        /*
-        val firstEvolutionLevel = (EvolvesTo(0) \ "evolution_details"(0) \ "min_level").get.as[String]
-        if (firstEvolutionLevel != null) response += s"at level $firstEvolutionLevel "
+        // Check for and prepare for a second evolution stage.
+        if (EvolutionDetails_FirstEvolution_Map("evolves_to") != List()) {
 
-        val firstEvolutionName = (EvolvesTo(0) \ "species" \ "name").get.as[String]
-        if (firstEvolutionName != null) response += s"into $firstEvolutionName"
-*/
+          val EvolutionDetails_SecondEvolution_Map: Map[String,Any] = EvolutionDetails_FirstEvolution_Map("evolves_to").asInstanceOf[List[Any]](0).asInstanceOf[Map[String,Any]]
+          response += ", and then evolves again "
+
+          val SecondEvolution_Level = EvolutionDetails_SecondEvolution_Map("evolution_details").asInstanceOf[List[Any]](0).asInstanceOf[Map[String,Any]]("min_level")
+          if (SecondEvolution_Level != null) {
+            response += s"at level $SecondEvolution_Level "
+          } else {
+            response += "through a means other than levelling up, "
+          }
+
+          val SecondEvolution_Name = EvolutionDetails_SecondEvolution_Map("species").asInstanceOf[Map[String,Any]]("name")
+          if (SecondEvolution_Name != null) {
+            response += s"into $SecondEvolution_Name"
+          } else {
+            response += "but I don't seem to have a name for that final evolution. Sorry about that"
+          }
+
+        }
+        response += ". "
       } else {
         response = "It appears this Poke'mon doesn't evolve into or from anything else. "
       }
