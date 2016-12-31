@@ -36,16 +36,38 @@ class AlexaBulbaSpeechlet extends Speechlet {
 
     if (intentName == "GetPokemonEvolution") {
       // This is where we actually handle the user's question and provide a response.
-      val ReceivedPokeName = request.getIntent.getSlot("pokemonname").getValue.toLowerCase
-      // DEBUG
+      var ReceivedPokeName: String = ""
+      try {
+        ReceivedPokeName = request.getIntent.getSlot("pokemonname").getValue.toLowerCase
+      } catch {
+        case e: Exception =>
+          val intentInfo = intent.toString
+          val errorResponse =
+            s"""
+              | I'm having trouble parsing that Pokemon name.
+              | The intent name was
+              | Here's the Intent that I saw: $intentInfo
+              | Here's the error I got $e.
+            """.stripMargin
+          return new SpeechletResponse(new PlainTextOutputSpeech(errorResponse))
+      }
       logInvocation(s"onIntent detected pokemonname: $ReceivedPokeName", request, session)
       val PokeEvolutionInfoAnswer = AlexaBulba.getEvolutionDetails(ReceivedPokeName)
       val outputSpeech = new PlainTextOutputSpeech(PokeEvolutionInfoAnswer)
       new SpeechletResponse(outputSpeech)
+
     } else if (intentName == "AMAZON.HelpIntent") {
+      logInvocation(s"onIntent detected $intentName", request, session)
       val outputSpeech = new PlainTextOutputSpeech(helpText)
       new SpeechletResponse(outputSpeech)
+
+    } else if (intentName == "AMAZON.CancelIntent") {
+      logInvocation(s"onIntent detected $intentName, cancelling.", request, session)
+      val outputSpeech = new PlainTextOutputSpeech("Until next time! ")
+      new SpeechletResponse(outputSpeech)
+
     } else {
+      logInvocation("onIntent didn't match an intent, exiting.", request, session)
       val outputSpeech = new PlainTextOutputSpeech("Until next time! ")
       new SpeechletResponse(outputSpeech)
     }
