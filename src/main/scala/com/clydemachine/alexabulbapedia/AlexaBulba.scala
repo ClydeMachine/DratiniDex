@@ -3,38 +3,17 @@ package com.clydemachine.alexabulbapedia
 import java.io.IOException
 import java.net.SocketTimeoutException
 
-import play.api.libs.json._
-import com.lambdaworks.jacks._
+import com.lambdaworks.jacks.JacksMapper
+import play.api.libs.json.Json
 
-import com.amazon.speech.slu.Intent
-import com.amazon.speech.speechlet.{
-  IntentRequest,
-  LaunchRequest,
-  Session,
-  SessionEndedRequest,
-  SessionStartedRequest,
-  Speechlet,
-  SpeechletRequest
-}
-/*
- * Taking heavy direction from: https://github.com/freqlabs/alexa-8ball-scala/
- * Logic flow:
- *
- * Take name from the user.
- * Get ID from name with endpointGetPokeName.
- * Use ID to get evolution information with endpointGetEvolInfo.
- *  Parse evolution information with logic to determine stages, names, levels, special conditions?
- * Return resulting speech string.
- *
- */
-
-class AlexaBulba {
+/** This code by ClydeMachine - clydemachine@gmail.com */
+object AlexaBulba {
 
   val endpointGetPokeName = "http://pokeapi.co/api/v2/pokemon-species/"
   val endpointGetEvolInfo = "http://pokeapi.co/api/v2/evolution-chain/"
 
   def get(url: String, connectTimeout: Int = 10000, readTimeout: Int = 10000, requestMethod: String = "GET"): String =  {
-    import java.net.{URL, HttpURLConnection}
+    import java.net.{HttpURLConnection, URL}
     val connection = new URL(url).openConnection.asInstanceOf[HttpURLConnection]
     connection.setConnectTimeout(connectTimeout)
     connection.setReadTimeout(readTimeout)
@@ -52,10 +31,8 @@ class AlexaBulba {
       val PokemonEvolutionChainURL = ((PokemonSpeciesDetails \ "evolution_chain" \ "url").get).as[String]
       val PokemonEvolutionChainDetails = Json.parse(get(PokemonEvolutionChainURL))
 
-      // Does this evolution chain contain evolution stages?
+      // Get chain dictionary and convert it to a Scala map for parsing.
       val Chain = (PokemonEvolutionChainDetails \ "chain").get.toString
-
-      // Convert Chain to a Scala map.
       val EvolutionMap = JacksMapper.readValue[Map[String,Any]](Chain)
 
       var response = ""
@@ -99,8 +76,8 @@ class AlexaBulba {
       }
       return response
     } catch {
-      case ioexception: IOException => return s"IOException! $ioexception"
-      case timeout: SocketTimeoutException => return s"Request timed out! $timeout"
+      case ioexception: IOException => return s"Looks like the database too long to send a response, IOException. Here are the details I have on the error: $ioexception"
+      case timeout: SocketTimeoutException => return s"Looks like the request to the database timed out. Here are the details I have on the error: $timeout"
     }
   }
 }
