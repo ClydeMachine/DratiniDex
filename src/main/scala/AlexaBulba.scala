@@ -32,7 +32,7 @@ class AlexaBulba {
   val endpointGetPokeName = "http://pokeapi.co/api/v2/pokemon-species/"
   val endpointGetEvolInfo = "http://pokeapi.co/api/v2/evolution-chain/"
 
-  def get(url: String, connectTimeout: Int = 5000, readTimeout: Int = 5000, requestMethod: String = "GET"): String =  {
+  def get(url: String, connectTimeout: Int = 10000, readTimeout: Int = 10000, requestMethod: String = "GET"): String =  {
     import java.net.{URL, HttpURLConnection}
     val connection = new URL(url).openConnection.asInstanceOf[HttpURLConnection]
     connection.setConnectTimeout(connectTimeout)
@@ -53,9 +53,26 @@ class AlexaBulba {
       val PokemonEvolutionChainDetails = Json.parse(get(PokemonEvolutionChainURL))
 
       // Does this evolution chain contain evolution stages?
+      val Chain = (PokemonEvolutionChainDetails \ "chain").get
+      val EvolvesTo = (Chain \ "evolves_to").get
+      var response = ""
+      if (EvolvesTo != null) {
+        /*
+        Pokename evolves at level [evolves_to(0).evolution_details(0).min_level] into [evolves_to(0).species.name].
+        , Then again at [evolves_to(0).evolves_to(0).evolution_details(0).min_level] into evolves_to(0).evolves_to(0).species.name.
+        min_level is null if special evolution, evolves_to = [] if none.
+        */
+        response += "It appears " + pokename + " evolves "
+        val firstEvolutionLevel = (EvolvesTo(0) \ "evolution_details"(0) \ "min_level").get.as[String]
+        if (firstEvolutionLevel != null) response += s"at level $firstEvolutionLevel "
 
+        val firstEvolutionName = (EvolvesTo(0) \ "species" \ "name").get.as[String]
+        if (firstEvolutionName != null) response += s"into $firstEvolutionName"
 
-      return "Evolution information result returned."
+      } else {
+        response = "It appears this Poke'mon doesn't evolve into or from anything else. "
+      }
+      return response
     } catch {
       case ioexception: IOException => return s"IOException! $ioexception"
       case timeout: SocketTimeoutException => return s"Request timed out! $timeout"

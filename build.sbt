@@ -15,6 +15,7 @@ lazy val root = (project in file(".")).
     libraryDependencies += "com.amazonaws" % "aws-lambda-java-core" % "1.1.0",
     libraryDependencies += "com.amazonaws" % "aws-lambda-java-events" % "1.0.0",
     libraryDependencies += "com.typesafe.play" % "play-json_2.11" % "2.5.10",
+    libraryDependencies += "com.lambdaworks" %% "jacks" % "2.3.3",
     libraryDependencies += "com.amazon.alexa" % "alexa-skills-kit" % "1.2"
   )
 
