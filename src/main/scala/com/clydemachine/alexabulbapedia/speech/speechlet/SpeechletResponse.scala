@@ -6,18 +6,10 @@ import com.clydemachine.alexabulbapedia.speech.ui.PlainTextOutputSpeech
 
 class SpeechletResponse(
                        outputSpeech: OutputSpeech = null,
-                       repromptText: String = null,
                        card: Card = null,
+                       reprompt: Reprompt = null,
                        shouldEndSession: Boolean = true
                        ) extends speechlet.SpeechletResponse {
-
-  // Handle reprompt text, convert to Reprompt type before passing.
-  var reprompt: Reprompt = null
-  if (repromptText != null) {
-    val repromptOutputSpeech: OutputSpeech = new PlainTextOutputSpeech(repromptText)
-    reprompt = new Reprompt
-    reprompt.setOutputSpeech(repromptOutputSpeech)
-  }
   setOutputSpeech(outputSpeech)
   setCard(card)
   setReprompt(reprompt)

@@ -1,8 +1,8 @@
 package com.clydemachine.alexabulbapedia
 
 import com.amazon.speech.slu.{Intent, Slot}
-import com.amazon.speech.speechlet._
 import com.clydemachine.alexabulbapedia.speech.speechlet.SpeechletResponse
+import com.amazon.speech.speechlet._
 import com.clydemachine.alexabulbapedia.speech.ui.PlainTextOutputSpeech
 
 class AlexaBulbaSpeechlet extends Speechlet {
@@ -40,9 +40,9 @@ class AlexaBulbaSpeechlet extends Speechlet {
         """
           | This skill gives evolution information for almost all Poke'mon in existence.
           | Ask something like, what does Abra evolve into, and I'll give you what I know.
+          | Which Poke'mon would you like to know about?
         """.stripMargin)
-      val repromptText = "Which Poke'mon would you like to know about? "
-      new SpeechletResponse(outputSpeech, repromptText)
+      new SpeechletResponse(outputSpeech)
     } else {
       val outputSpeech = new PlainTextOutputSpeech("Until next time! ")
       new SpeechletResponse(outputSpeech)
