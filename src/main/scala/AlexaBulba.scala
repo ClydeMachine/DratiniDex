@@ -17,7 +17,7 @@ import com.amazon.speech.speechlet.{
   SpeechletRequest
 }
 
-class AlexaBulba {
+object AlexaBulba {
 
   val endpointGetPokeName = "http://pokeapi.co/api/v2/pokemon-species/"
   val endpointGetEvolInfo = "http://pokeapi.co/api/v2/evolution-chain/"
