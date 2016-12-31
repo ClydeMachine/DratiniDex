@@ -6,17 +6,6 @@ import java.net.SocketTimeoutException
 import play.api.libs.json._
 import com.lambdaworks.jacks._
 
-import com.amazon.speech.slu.Intent
-import com.amazon.speech.speechlet.{
-  IntentRequest,
-  LaunchRequest,
-  Session,
-  SessionEndedRequest,
-  SessionStartedRequest,
-  Speechlet,
-  SpeechletRequest
-}
-
 object AlexaBulba {
 
   val endpointGetPokeName = "http://pokeapi.co/api/v2/pokemon-species/"
@@ -41,10 +30,8 @@ object AlexaBulba {
       val PokemonEvolutionChainURL = ((PokemonSpeciesDetails \ "evolution_chain" \ "url").get).as[String]
       val PokemonEvolutionChainDetails = Json.parse(get(PokemonEvolutionChainURL))
 
-      // Does this evolution chain contain evolution stages?
+      // Get chain dictionary and convert it to a Scala map for parsing.
       val Chain = (PokemonEvolutionChainDetails \ "chain").get.toString
-
-      // Convert Chain to a Scala map.
       val EvolutionMap = JacksMapper.readValue[Map[String,Any]](Chain)
 
       var response = ""
@@ -88,8 +75,8 @@ object AlexaBulba {
       }
       return response
     } catch {
-      case ioexception: IOException => return s"IOException! $ioexception"
-      case timeout: SocketTimeoutException => return s"Request timed out! $timeout"
+      case ioexception: IOException => return s"Looks like the database too long to send a response, IOException. Here are the details I have on the error: $ioexception"
+      case timeout: SocketTimeoutException => return s"Looks like the request to the database timed out. Here are the details I have on the error: $timeout"
     }
   }
 }
