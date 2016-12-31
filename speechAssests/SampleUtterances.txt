@@ -1,6 +1,5 @@
-GetPokemonEvolution about {pokemonname}
 GetPokemonEvolution get evolution information for {pokemonname}
-GetPokemonEvolution tell me about {pokemonname}
+GetPokemonEvolution about {pokemonname}
 GetPokemonEvolution what does {pokemonname} evolve into
 GetPokemonEvolution what {pokemonname} evolves into
 GetPokemonEvolution what is the evolved form of {pokemonname}
