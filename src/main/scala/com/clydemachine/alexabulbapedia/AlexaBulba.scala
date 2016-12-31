@@ -3,16 +3,17 @@ package com.clydemachine.alexabulbapedia
 import java.io.IOException
 import java.net.SocketTimeoutException
 
-import play.api.libs.json._
-import com.lambdaworks.jacks._
+import com.lambdaworks.jacks.JacksMapper
+import play.api.libs.json.Json
 
+/** This code by ClydeMachine - clydemachine@gmail.com */
 object AlexaBulba {
 
   val endpointGetPokeName = "http://pokeapi.co/api/v2/pokemon-species/"
   val endpointGetEvolInfo = "http://pokeapi.co/api/v2/evolution-chain/"
 
   def get(url: String, connectTimeout: Int = 10000, readTimeout: Int = 10000, requestMethod: String = "GET"): String =  {
-    import java.net.{URL, HttpURLConnection}
+    import java.net.{HttpURLConnection, URL}
     val connection = new URL(url).openConnection.asInstanceOf[HttpURLConnection]
     connection.setConnectTimeout(connectTimeout)
     connection.setReadTimeout(readTimeout)

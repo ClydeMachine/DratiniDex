@@ -1,15 +1,6 @@
 package com.clydemachine.alexabulbapedia
 
-import com.amazon.speech.slu.Intent
-import com.amazon.speech.speechlet.{
-  IntentRequest,
-  LaunchRequest,
-  Session,
-  SessionEndedRequest,
-  SessionStartedRequest,
-  Speechlet,
-  SpeechletRequest
-}
+import com.amazon.speech.speechlet._
 import com.clydemachine.alexabulbapedia.speech.speechlet.SpeechletResponse
 import com.clydemachine.alexabulbapedia.speech.ui.PlainTextOutputSpeech
 
