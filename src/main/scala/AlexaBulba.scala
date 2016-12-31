@@ -4,6 +4,7 @@ import java.io.IOException
 import java.net.SocketTimeoutException
 
 import play.api.libs.json._
+import com.lambdaworks.jacks._
 
 import com.amazon.speech.slu.Intent
 import com.amazon.speech.speechlet.{
@@ -53,22 +54,32 @@ class AlexaBulba {
       val PokemonEvolutionChainDetails = Json.parse(get(PokemonEvolutionChainURL))
 
       // Does this evolution chain contain evolution stages?
-      val Chain = (PokemonEvolutionChainDetails \ "chain").get
-      val EvolvesTo = (Chain \ "evolves_to").get
+      val Chain = (PokemonEvolutionChainDetails \ "chain").get.toString
+
+      // Convert Chain to a Scala map.
+      val EvolutionMap = JacksMapper.readValue[Map[String,Any]](Chain)
+
       var response = ""
-      if (EvolvesTo != null) {
+      if (EvolutionMap("evolves_to") != List()) {
         /*
+        Response model:
+
         Pokename evolves at level [evolves_to(0).evolution_details(0).min_level] into [evolves_to(0).species.name].
         , Then again at [evolves_to(0).evolves_to(0).evolution_details(0).min_level] into evolves_to(0).evolves_to(0).species.name.
         min_level is null if special evolution, evolves_to = [] if none.
         */
+
+        val EvolutionMapList: List[String] = EvolutionMap("evolves_to").asInstanceOf[List[String]]
+        println(EvolutionMapList(0))
+
         response += "It appears " + pokename + " evolves "
+        /*
         val firstEvolutionLevel = (EvolvesTo(0) \ "evolution_details"(0) \ "min_level").get.as[String]
         if (firstEvolutionLevel != null) response += s"at level $firstEvolutionLevel "
 
         val firstEvolutionName = (EvolvesTo(0) \ "species" \ "name").get.as[String]
         if (firstEvolutionName != null) response += s"into $firstEvolutionName"
-
+*/
       } else {
         response = "It appears this Poke'mon doesn't evolve into or from anything else. "
       }

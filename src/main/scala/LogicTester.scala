@@ -5,5 +5,6 @@ object LogicTester extends AlexaBulba {
     // Run tests of the above logic. Later we'll integrate it into the Alexa skill structure.
     // Test with kangaskhan for no evolutions, abra for a pretty standard evolution, gengar for a final evolution.
     println(getEvolutionDetails("kangaskhan"))
+    println(getEvolutionDetails("abra"))
   }
 }
