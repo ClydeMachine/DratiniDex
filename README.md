@@ -4,22 +4,37 @@
 
 An Alexa skill to retrieve Pokémon information. Written in Scala, utilizing the PokéAPI.
 
-Disclaimer: Information is only as up-to-date as the PokeAPI information is. At the time of this writing, Poke'mon in Sun/Moon are not available.
+Disclaimer: Information is only as up-to-date as the PokeAPI information is. At the time of this writing, Pokémon in Sun/Moon are not available.
 
-# Prerequisites
+# How Do I Use This Alexa Skill?
 
-- Java 1.8
-- Scala 2.11.8
-- SBT
+Ask your Echo or Echo Dot such questions as... 
+```
+Alexa, ask DratiniDex about Bulbasaur.
+Alexa, ask DratiniDex what level Abra evolves at.
+Alexa, ask DratiniDex what Venonat evolves into.
+Alexa, ask DratiniDex how do I use this?
+```
+
+At the time of this writing this is not a published skill, so to use it you'll need to build your own. But hey, that's probably why you're on this page anyway, yeah?
+
+# Prerequisites to Build Your Own
+
+- Java 1.8.x
+- Scala 2.11.x
+- SBT 0.13.x
 - AWS Account with Lambda
 - An Alexa-capable device, such as the Echo or Echo Dot.
 
+AWS Lambda handler should be set to:
+```
+com.clydemachine.dratinidex.DratiniDexSpeechletRequestStreamHandler
+```
+
 # License and Legal
 
-License is in file LICENSE.
-
-I don't own Poke'mon, and don't monetize any part of this Alexa skill. Feel free to improve, contribute, make your own, etc.
+I don't own Pokémon, and am not personally affiliated with anyone who maintains Pokémon. I don't own PokéAPI, and am not personally affiliated with anyone who maintains PokéAPI. I do not and will not monetize any part of this software, as I only intend for it to be a useful Alexa skill for those who enjoy the Pokémon games. Feel free to improve, contribute, make your own, etc. according to the license on this project.
 
 # Authors and Notes
 
-Joe Greene, aka "Clyde Machine".
+Joe Greene <contact@clydemachine.com>
