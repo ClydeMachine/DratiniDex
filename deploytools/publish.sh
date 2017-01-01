@@ -8,5 +8,5 @@ clear
 aws lambda update-function-code --region us-east-1 --function-name "AlexaBulba" --s3-bucket "com.clydemachine.alexabulba" --s3-key "AlexaBulba.jar" --debug
 popd
 echo "----"
-echo "Done! Test the skill now."
-read -n1 -r -p "Press space to continue..." key
+echo "Done! Test the skill now.\nRemember that updates to IntentSchema, POKENAMES list, or the SampleUtterances MUST BE DONE MANUALLY."
+read -n1 -r -p "Press any key to continue..." key
