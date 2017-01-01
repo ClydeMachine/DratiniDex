@@ -1,5 +1,7 @@
 # DratiniDex
 
+![DratiniDex Icon](/src/main/resources/images/DratiniDex-DratiniIconx512.png)
+
 An Alexa skill to retrieve Pokémon information. Written in Scala, utilizing the PokéAPI.
 
 Disclaimer: Information is only as up-to-date as the PokeAPI information is. At the time of this writing, Poke'mon in Sun/Moon are not available.
