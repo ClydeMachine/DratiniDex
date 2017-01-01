@@ -10,10 +10,10 @@ Disclaimer: Information is only as up-to-date as the PokeAPI information is. At 
 
 Ask your Echo or Echo Dot such questions as... 
 ```
-Alexa, ask DratiniDex about Bulbasaur.
-Alexa, ask DratiniDex what level Abra evolves at.
-Alexa, ask DratiniDex what Venonat evolves into.
-Alexa, ask DratiniDex how do I use this?
+Alexa, ask TiniDex about Bulbasaur.
+Alexa, ask TiniDex what level Abra evolves at.
+Alexa, ask TiniDex what Venonat evolves into.
+Alexa, ask TiniDex how do I use this?
 ```
 
 At the time of this writing this is not a published skill, so to use it you'll need to build your own. But hey, that's probably why you're on this page anyway, yeah?
