@@ -20,15 +20,20 @@ At the time of this writing this is not a published skill, so to use it you'll n
 
 # Prerequisites to Build Your Own
 
+The following information assumes you already know how to create Alexa Skills and AWS Lambda functions.
+
 - Java 1.8.x
 - Scala 2.11.x
 - SBT 0.13.x
-- AWS Account with Lambda
+- AWS Account for Lambda service access
 - An Alexa-capable device, such as the Echo or Echo Dot.
 
-AWS Lambda handler should be set to:
+AWS Lambda Configuration Information:
 ```
-com.clydemachine.dratinidex.DratiniDexSpeechletRequestStreamHandler
+Region: us-east-1 (Alexa triggers don't show up in other regions, it seems.)
+Runtime: Java 8
+Handler: com.clydemachine.dratinidex.DratiniDexSpeechletRequestStreamHandler
+Memory: I used 512MB as that's the default. Tweak this if you're adventurous.
 ```
 
 # License and Legal
