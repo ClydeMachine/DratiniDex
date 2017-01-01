@@ -1,8 +1,8 @@
-package com.clydemachine.alexabulbapedia.speech.speechlet
+package com.clydemachine.dratinidex.speech.speechlet
 
 import com.amazon.speech.speechlet
 import com.amazon.speech.ui.{Card, OutputSpeech, Reprompt}
-import com.clydemachine.alexabulbapedia.speech.ui.PlainTextOutputSpeech
+import com.clydemachine.dratinidex.speech.ui.PlainTextOutputSpeech
 
 class SpeechletResponse(
                        outputSpeech: OutputSpeech = null,
