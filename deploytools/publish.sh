@@ -9,4 +9,4 @@ aws lambda update-function-code --region us-east-1 --function-name "AlexaBulba" 
 popd
 echo "----"
 echo "Done! Test the skill now."
-read -n1 -r -p "Press space to continue..." key
+read -n1 -r -p "Press any key to continue..." key

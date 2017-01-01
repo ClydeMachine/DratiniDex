@@ -45,9 +45,8 @@ class AlexaBulbaSpeechlet extends Speechlet {
           val errorResponse =
             s"""
               | I'm having trouble parsing that Pokemon name.
-              | The intent name was
-              | Here's the Intent that I saw: $intentInfo
-              | Here's the error I got $e.
+              | This usually happens if a particular phrase wasn't heard correctly - try rephrasing your question.
+              | For debugging purposes, the error I got was $e.
             """.stripMargin
           return new SpeechletResponse(new PlainTextOutputSpeech(errorResponse))
       }
