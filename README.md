@@ -1,6 +1,6 @@
 # DratiniDex
 
-![DratiniDex Icon](/src/main/resources/images/DratiniDex-DratiniIconx512.png)
+![DratiniDex Icon](/src/main/resources/images/DratiniDex-DratiniIconx108.png)
 
 An Alexa skill to retrieve Pokémon information. Written in Scala, utilizing the PokéAPI.
 
