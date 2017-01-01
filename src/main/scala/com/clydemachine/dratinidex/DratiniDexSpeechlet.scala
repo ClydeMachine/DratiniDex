@@ -1,12 +1,12 @@
-package com.clydemachine.alexabulbapedia
+package com.clydemachine.dratinidex
 
 import com.amazon.speech.slu.{Intent, Slot}
-import com.clydemachine.alexabulbapedia.speech.speechlet.SpeechletResponse
+import com.clydemachine.dratinidex.speech.speechlet.SpeechletResponse
 import com.amazon.speech.speechlet._
-import com.clydemachine.alexabulbapedia.speech.ui.PlainTextOutputSpeech
+import com.clydemachine.dratinidex.speech.ui.PlainTextOutputSpeech
 
-class AlexaBulbaSpeechlet extends Speechlet {
-  import AlexaBulbaSpeechlet._
+class DratiniDexSpeechlet extends Speechlet {
+  import DratiniDexSpeechlet._
 
   val helpText =
     """
@@ -51,7 +51,7 @@ class AlexaBulbaSpeechlet extends Speechlet {
           return new SpeechletResponse(new PlainTextOutputSpeech(errorResponse))
       }
       logInvocation(s"onIntent detected pokemonname: $ReceivedPokeName", request, session)
-      val PokeEvolutionInfoAnswer = AlexaBulba.getEvolutionDetails(ReceivedPokeName)
+      val PokeEvolutionInfoAnswer = DratiniDex.getEvolutionDetails(ReceivedPokeName)
       val outputSpeech = new PlainTextOutputSpeech(PokeEvolutionInfoAnswer)
       new SpeechletResponse(outputSpeech)
 
@@ -77,7 +77,7 @@ class AlexaBulbaSpeechlet extends Speechlet {
   }
 }
 
-object AlexaBulbaSpeechlet {
+object DratiniDexSpeechlet {
   private def logInvocation(name: String, request: SpeechletRequest, session: Session): Unit = {
     val requestID = request.getRequestId
     val sessionID = session.getSessionId

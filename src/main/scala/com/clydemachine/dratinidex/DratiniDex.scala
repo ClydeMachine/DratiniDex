@@ -1,4 +1,4 @@
-package com.clydemachine.alexabulbapedia
+package com.clydemachine.dratinidex
 
 import java.io.IOException
 import java.net.SocketTimeoutException
@@ -7,7 +7,7 @@ import com.lambdaworks.jacks.JacksMapper
 import play.api.libs.json.Json
 
 /** This code by ClydeMachine - clydemachine@gmail.com */
-object AlexaBulba {
+object DratiniDex {
 
   val endpointGetPokeName = "http://pokeapi.co/api/v2/pokemon-species/"
   val endpointGetEvolInfo = "http://pokeapi.co/api/v2/evolution-chain/"

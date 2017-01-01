@@ -1,4 +1,4 @@
-name := "Alexa-Bulbapedia-Scala"
+name := "DratiniDex"
 
 version := "1.0"
 
@@ -10,7 +10,7 @@ lazy val root = (project in file(".")).
   settings(
     name := "lambda-demo",
     version := "1.0",
-    scalaVersion := "2.11.4",
+    scalaVersion := "2.11.8",
     retrieveManaged := true,
     libraryDependencies += "com.amazonaws" % "aws-lambda-java-core" % "1.1.0",
     libraryDependencies += "com.amazonaws" % "aws-lambda-java-events" % "1.0.0",

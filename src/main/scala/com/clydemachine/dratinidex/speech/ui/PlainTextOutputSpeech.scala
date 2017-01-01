@@ -1,4 +1,4 @@
-package com.clydemachine.alexabulbapedia.speech.ui
+package com.clydemachine.dratinidex.speech.ui
 
 import com.amazon.speech.ui
 
