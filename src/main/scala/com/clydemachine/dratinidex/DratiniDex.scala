@@ -28,7 +28,7 @@ object DratiniDex {
   def getEvolutionDetails(pokename: String): String = {
     try {
       val PokemonSpeciesDetails = Json.parse(get(endpointGetPokeName + pokename))
-      val PokemonEvolutionChainURL = ((PokemonSpeciesDetails \ "evolution_chain" \ "url").get).as[String]
+      val PokemonEvolutionChainURL = (PokemonSpeciesDetails \ "evolution_chain" \ "url").get.as[String]
       val PokemonEvolutionChainDetails = Json.parse(get(PokemonEvolutionChainURL))
 
       // Get chain dictionary and convert it to a Scala map for parsing.
@@ -76,8 +76,8 @@ object DratiniDex {
       }
       return response
     } catch {
-      case ioexception: IOException => return s"Looks like the database too long to send a response, IOException. Here are the details I have on the error: $ioexception"
-      case timeout: SocketTimeoutException => return s"Looks like the request to the database timed out. Here are the details I have on the error: $timeout"
+      case ioexception: IOException => return s"Sorry, I got an error looking up the Pokemon $pokename. If I misheard the Pokemon you asked for, my apologies. Please try asking again." //+ " IOException. Here are the details I have on the error: $ioexception"
+      case timeout: SocketTimeoutException => return s"Sorry, looks like the request to the database timed out. Try asking again in a moment." //+ " Here are the details I have on the error: $timeout"
     }
   }
 }
