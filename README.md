@@ -2,7 +2,7 @@
 
 ![DratiniDex Icon](/src/main/resources/images/DratiniDex-DratiniIconx108.png)
 
-An Alexa skill to retrieve Pokémon information. Written in Scala, utilizing the PokéAPI.
+An Alexa skill to retrieve Pokémon evolution information. Written in Scala, utilizing the PokéAPI. Specifically, this skill will tell you a Pokémon's evolutionary stages, and what level that they evolve at. If the evolution requires something other than a level to evolve at, Alexa will give a general response to indicate as much.
 
 Disclaimer: Information is only as up-to-date as the PokeAPI information is. At the time of this writing, Pokémon in Sun/Moon are not available.
 
