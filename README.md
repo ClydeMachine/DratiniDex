@@ -10,11 +10,13 @@ Disclaimer: Information is only as up-to-date as the PokeAPI information is. At 
 
 Ask your Echo or Echo Dot such questions as... 
 ```
-Alexa, ask TiniDex about Bulbasaur.
-Alexa, ask TiniDex what level Abra evolves at.
-Alexa, ask TiniDex what Venonat evolves into.
-Alexa, ask TiniDex how do I use this?
+Alexa, ask My Tini Dex about Bulbasaur.
+Alexa, ask My Tini Dex what level Abra evolves at.
+Alexa, ask My Tini Dex what Venonat evolves into.
+Alexa, ask My Tini Dex how do I use this?
 ```
+
+Unfortunately you can't use "DratiniDex" because Alexa doesn't seem to register that phrase to invoke the skill. "My Tini Dex" it is.
 
 At the time of this writing this is not a published skill, so to use it you'll need to build your own. But hey, that's probably why you're on this page anyway, yeah?
 
@@ -39,6 +41,8 @@ Memory: I used 512MB as that's the default. Tweak this if you're adventurous.
 # License and Legal
 
 I don't own Pokémon, and am not personally affiliated with anyone who maintains Pokémon. I don't own PokéAPI, and am not personally affiliated with anyone who maintains PokéAPI. I do not and will not monetize any part of this software, as I only intend for it to be a useful Alexa skill for those who enjoy the Pokémon games. Feel free to improve, contribute, make your own, etc. according to the license on this project.
+
+This Alexa skill is not sponsored or endorsed by Pokémon, Nintendo or their affiliates.
 
 # Authors and Notes
 
