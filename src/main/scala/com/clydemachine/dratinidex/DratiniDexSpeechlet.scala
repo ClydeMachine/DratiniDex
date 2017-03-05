@@ -22,7 +22,7 @@ class DratiniDexSpeechlet extends Speechlet {
   override def onLaunch(request: LaunchRequest, session: Session): SpeechletResponse = {
     logInvocation("onLaunch", request, session)
     val outputSpeech = new PlainTextOutputSpeech(helpText)
-    new SpeechletResponse(outputSpeech)
+    new SpeechletResponse(outputSpeech=outputSpeech, shouldEndSession=false)
   }
 
   override def onIntent(request: IntentRequest, session: Session): SpeechletResponse = {
