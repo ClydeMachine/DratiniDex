@@ -19,7 +19,7 @@ class DratiniDexSpeechlet extends Speechlet {
     """
       | This skill gives evolution information for almost all Poke'mon in existence.
       | Ask something like, what does Abra evolve into, and I'll give you what I know.
-      | What Poke'mon would like to know about?
+      | What Poke'mon would you like to know about?
     """.stripMargin
 
   override def onSessionStarted(request: SessionStartedRequest, session: Session): Unit = {

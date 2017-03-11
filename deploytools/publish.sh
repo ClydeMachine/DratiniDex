@@ -9,6 +9,7 @@ pushd ..
 echo "This could take more than a few minutes..."
 echo "The following is the current branch that we'll be pushing."
 git branch
+mv  target/scala-2.11/DratiniDex-assembly-1.0.jar target/scala-2.11/DratiniDex-assembly-1.0.jar.old
 sbt compile && sbt assembly
 aws s3 cp --region us-east-1 target/scala-2.11/DratiniDex-assembly-1.0.jar s3://com.clydemachine.dratinidex/DratiniDex.jar --debug
 clear
