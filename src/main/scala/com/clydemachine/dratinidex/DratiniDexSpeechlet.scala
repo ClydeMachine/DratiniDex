@@ -8,11 +8,18 @@ import com.clydemachine.dratinidex.speech.ui.PlainTextOutputSpeech
 class DratiniDexSpeechlet extends Speechlet {
   import DratiniDexSpeechlet._
 
-  val helpText =
+  val introText =
     """
       | This skill gives evolution information for almost all Poke'mon in existence.
       | Ask something like, what does Abra evolve into, and I'll give you what I know.
       | Try asking about a specific Poke'mon!
+    """.stripMargin
+
+  val helpText =
+    """
+      | This skill gives evolution information for almost all Poke'mon in existence.
+      | Ask something like, what does Abra evolve into, and I'll give you what I know.
+      | What Poke'mon would like to know about?
     """.stripMargin
 
   override def onSessionStarted(request: SessionStartedRequest, session: Session): Unit = {
@@ -21,7 +28,7 @@ class DratiniDexSpeechlet extends Speechlet {
 
   override def onLaunch(request: LaunchRequest, session: Session): SpeechletResponse = {
     logInvocation("onLaunch", request, session)
-    val outputSpeech = new PlainTextOutputSpeech(helpText)
+    val outputSpeech = new PlainTextOutputSpeech(introText)
     new SpeechletResponse(outputSpeech=outputSpeech, shouldEndSession=false)
   }
 
@@ -58,7 +65,7 @@ class DratiniDexSpeechlet extends Speechlet {
     } else if (intentName == "AMAZON.HelpIntent") {
       logInvocation(s"onIntent detected $intentName", request, session)
       val outputSpeech = new PlainTextOutputSpeech(helpText)
-      new SpeechletResponse(outputSpeech)
+      new SpeechletResponse(outputSpeech=outputSpeech, shouldEndSession=false)
 
     } else if (intentName == "AMAZON.CancelIntent") {
       logInvocation(s"onIntent detected $intentName, cancelling.", request, session)
